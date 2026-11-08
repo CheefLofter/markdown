@@ -1,4 +1,13 @@
-# markdown
+# **WIP**
+
+# dumb-markdown
+
+- a simple markup language inspired from markdown.
+- written is Typescript
+
+## current ststus
+
+- converts various headings, simple text, links to html 
 
 To install dependencies:
 
@@ -9,15 +18,6 @@ bun install
 To run:
 
 ```bash
-bun run index.ts
+bun index.ts <markdown file > // has to have .md extention
 ```
 
-To type check:
-
-```bash
-bun check
-```
-
-Run `bun fmt` to format the code.
-
-This project was created using `bun init` in bun v1.4.4. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
