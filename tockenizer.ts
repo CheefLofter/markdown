@@ -10,7 +10,8 @@ export enum TokenType{
     Text,
     Seperator,
     Uoli,
-    emptyline,
+    Emptyline,
+    Img,
     Empty
 }
 
@@ -30,7 +31,7 @@ export function tokenizer(line: string):Token{
         return {type: TokenType.Seperator, value: [""]}
     }
     else if (line.trim() == "emp"){
-        return {type: TokenType.emptyline, value: [""]}
+        return {type: TokenType.Emptyline, value: [""]}
     }
 
 
@@ -65,6 +66,12 @@ export function tokenizer(line: string):Token{
         const url = src[0]
         src.shift()
         return { type: TokenType.URL, value: [url, src.join(" ")] };
+    }
+    else if (src[0] == "img"){
+        src.shift();
+        const url = src[0]
+        src.shift()
+        return { type: TokenType.Img, value: [url, src.join(" ")] };
     }
     else if (src[0] == "-"){
          src.shift();

@@ -20,11 +20,13 @@ export function convertToHTML(line: string): string {
             return `<h6>${token.value[0]}</h6>`;
         case TokenType.URL:
             return `<a href="${token.value[0]}">${token.value[1]}</a>`;
+        case TokenType.Img:
+            return `<img src="${token.value[0]}" alt="${token.value[1]}">`;
         case TokenType.Text:
             return `<p>${line}</p>`;
         case TokenType.Seperator:
             return `<hr>`;
-        case TokenType.emptyline:
+        case TokenType.Emptyline:
             return `<br><br>`;
         case TokenType.Uoli:
             return `<ul><li>${token.value[0]}</li></ul>`;

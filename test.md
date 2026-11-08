@@ -20,3 +20,6 @@ ___
 
 - uordered list element one
 - unoordered list element 2
+
+
+img ./logo.png logo image
