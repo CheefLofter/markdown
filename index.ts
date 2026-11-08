@@ -27,7 +27,7 @@ if (!filePath.endsWith(".md")) {
 const liner = new LineByLine(filePath);
 let line;
 
-await appendFile("output.html", "<!DOCTYPE html>\n<html>\n<head>\n<title>Converted Markdown</title>\n</head>\n<body>\n");
+Bun.write("output.html", "<!DOCTYPE html>\n<html>\n<head>\n<title>Converted Markdown</title>\n</head>\n<body>\n");
 
 while (line = liner.next()) {
 

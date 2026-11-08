@@ -10,6 +10,7 @@ export enum TokenType{
     Text,
     Seperator,
     Uoli,
+    emptyline,
     Empty
 }
 
@@ -27,6 +28,9 @@ export function tokenizer(line: string):Token{
 
     if (line.trim() == "---" || line.trim() == "***" || line.trim() == "___"){
         return {type: TokenType.Seperator, value: [""]}
+    }
+    else if (line.trim() == "emp"){
+        return {type: TokenType.emptyline, value: [""]}
     }
 
 
