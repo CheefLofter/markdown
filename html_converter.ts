@@ -24,6 +24,8 @@ export function convertToHTML(line: string): string {
             return `<p>${line}</p>`;
         case TokenType.Seperator:
             return `<hr>`;
+        case TokenType.Uoli:
+            return `<ul><li>${token.value[0]}</li></ul>`;
         case TokenType.Empty:
             return "";
         default:

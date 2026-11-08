@@ -9,6 +9,7 @@ export enum TokenType{
     URL,
     Text,
     Seperator,
+    Uoli,
     Empty
 }
 
@@ -60,6 +61,11 @@ export function tokenizer(line: string):Token{
         const url = src[0]
         src.shift()
         return { type: TokenType.URL, value: [url, src.join(" ")] };
+    }
+    else if (src[0] == "-"){
+         src.shift();
+        return { type: TokenType.Uoli, value: [src.join(" ")] };
+
     }
     else{
         return { type: TokenType.Text, value: [line] };
