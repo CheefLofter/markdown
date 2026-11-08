@@ -8,6 +8,7 @@ export enum TokenType{
     H6,
     URL,
     Text,
+    Seperator,
     Empty
 }
 
@@ -21,7 +22,13 @@ export function tokenizer(line: string):Token{
     const Tokens: Token[] = [];
     if (line == ""){
         return { type: TokenType.Empty, value: [""] };
-    } 
+    }
+
+    if (line.trim() == "---" || line.trim() == "***" || line.trim() == "___"){
+        return {type: TokenType.Seperator, value: [""]}
+    }
+
+
     let src = line.split(" ");
 
     if (src[0] == "#"){
@@ -55,7 +62,7 @@ export function tokenizer(line: string):Token{
         return { type: TokenType.URL, value: [url, src.join(" ")] };
     }
     else{
-        return { type: TokenType.Text, value: [""] };
+        return { type: TokenType.Text, value: [line] };
     }
 
 

@@ -32,5 +32,7 @@ await appendFile("output.html", "<!DOCTYPE html>\n<html>\n<head>\n<title>Convert
 while (line = liner.next()) {
 
     await appendFile("output.html", convertToHTML(line.toString()));
+    await appendFile("output.html", "\n");
+
 }
 await appendFile("output.html", "\n</body>\n</html>");

@@ -22,6 +22,8 @@ export function convertToHTML(line: string): string {
             return `<a href="${token.value[0]}">${token.value[1]}</a>`;
         case TokenType.Text:
             return `<p>${line}</p>`;
+        case TokenType.Seperator:
+            return `<hr>`;
         case TokenType.Empty:
             return "";
         default:
