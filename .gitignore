@@ -4,7 +4,7 @@ output.html
 
 # dependencies (bun install)
 node_modules
-
+build
 # output
 out
 dist
