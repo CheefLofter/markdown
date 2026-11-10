@@ -94,19 +94,14 @@ export function tokenizer(line: string): Token {
     if (src[0] == "!") {
         
         if (src[src.length - 1] != ")") {
-           
+
             return { type: TokenType.Text, value: [line] };
         }
-
         src.shift();
-
-
         let link = "";
         let dText = "";
-
         let roundbrak = [false, false];
         let boxbrack = [false, false];
-
 
         if (src[0] == "[") {
             src.shift();
@@ -122,9 +117,8 @@ export function tokenizer(line: string): Token {
             else {
                 return { type: TokenType.Text, value: [line] };
             }
-
-
         }
+
         if (src[0] == "(") {
             src.shift();
             roundbrak[0] = true;
@@ -139,8 +133,6 @@ export function tokenizer(line: string): Token {
             else {
                 return { type: TokenType.Text, value: [line] };
             }
-
-
         }
 
         if (roundbrak[0] && roundbrak[1] && boxbrack[0] && boxbrack[1]) {
@@ -149,15 +141,52 @@ export function tokenizer(line: string): Token {
         else {
             return { type: TokenType.Text, value: [line] };
         }
+    }
+
+    // link parsing
+
+    if (src[0] == "[" && src[src.length - 1] == ")") {
+        let link = "";
+        let dText = "";
+        let roundbrak = [false, true];
+        let boxbrack = [true, false];
+
+        src.shift();
+        while (src[0] != "]" && src.length > 0) {
+            dText += src[0];
+            src.shift();
+        }
+        if (src[0] == "]") {
+            boxbrack[1] = true;
+            src.shift();
+        }
+        else {
+            return { type: TokenType.Text, value: [line] };
+        }
 
 
+        if (src[0] == "(") {
+            src.shift();
+            roundbrak[0] = true;
+            while (src[0] != ")" && src.length > 0) {
+                link += src[0];
+                src.shift();
+            }
+
+
+        }
+
+        if (roundbrak[0] && roundbrak[1] && boxbrack[0] && boxbrack[1]) {
+            return { type: TokenType.URL, value: [link, dText] };
+        }
+        else {
+            return { type: TokenType.Text, value: [line] };
+        }
 
     }
 
-
     else {
-    return { type: TokenType.Text, value: [line] };
-}
-
+        return { type: TokenType.Text, value: [line] };
+    }
 
 }
