@@ -19,7 +19,7 @@ bun install
 To run:
 
 ```bash
-bun index.ts <markdown file > // has to have .md extention
+bun ./src/index.ts <markdown file > // has to have .md extention
 ```
 
 # Reference
