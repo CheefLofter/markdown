@@ -13,7 +13,7 @@ random text
 
 ---
 
-! https://google.com link to google
+![link to google](https://google.com)
 
 ___
 
