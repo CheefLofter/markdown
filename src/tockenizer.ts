@@ -10,6 +10,7 @@ export enum TokenType {
     Text,
     Seperator,
     Uoli,
+    Oli,
     Emptyline,
     Img,
     Empty
@@ -65,24 +66,20 @@ export function tokenizer(line: string): Token {
         src.shift();
         return { type: TokenType.H6, value: [src.join(" ")] };
     }
-    // else if (src[0] == "!"){
-    //     src.shift();
-    //     const url = src[0]
-    //     src.shift()
-    //     return { type: TokenType.URL, value: [url, src.join(" ")] };
-    // }
-    // else if (src[0] == "img"){
-    //     src.shift();
-    //     const url = src[0]
-    //     src.shift()
-    //     return { type: TokenType.Img, value: [url, src.join(" ")] };
-    // }
     else if (src[0] == "-") {
         src.shift();
         return { type: TokenType.Uoli, value: [src.join(" ")] };
     }
-
-
+    let split = src[0].split(""); // ts thinks the source can be undefined but there is a check for it that checks if the line is "" 
+    if (split[split.length - 1] == "." || split[split.length - 1] == ")") {
+      let list_key = split.join("").slice(0, split.length - 1);
+      if (!isNaN(Number(list_key))) {
+        src.shift();
+        return { type: TokenType.Oli, value: [list_key, src.join(" ")] };
+      }
+    
+    
+    }
 
     // full line parsing
 
@@ -92,7 +89,7 @@ export function tokenizer(line: string): Token {
     // image parsing
 
     if (src[0] == "!") {
-        
+
         if (src[src.length - 1] != ")") {
 
             return { type: TokenType.Text, value: [line] };
@@ -110,11 +107,12 @@ export function tokenizer(line: string): Token {
                 dText += src[0];
                 src.shift();
             }
-            if (src[0] == "]") {
+            if (src[0] == "]" ) {
                 boxbrack[1] = true;
                 src.shift();
             }
             else {
+                console.log("here");
                 return { type: TokenType.Text, value: [line] };
             }
         }
@@ -126,7 +124,7 @@ export function tokenizer(line: string): Token {
                 link += src[0];
                 src.shift();
             }
-            if (src[0] == ")") {
+            if (src[0] == ")" && src.length == 1) {
                 roundbrak[1] = true;
                 src.shift();
             }
@@ -145,7 +143,7 @@ export function tokenizer(line: string): Token {
 
     // link parsing
 
-    if (src[0] == "[" && src[src.length - 1] == ")") {
+    if (src[0] == "[" ) {
         let link = "";
         let dText = "";
         let roundbrak = [false, true];
@@ -168,9 +166,16 @@ export function tokenizer(line: string): Token {
         if (src[0] == "(") {
             src.shift();
             roundbrak[0] = true;
-            while (src[0] != ")" && src.length > 0) {
+            while (src[0] != ")" && src.length != 1) {
                 link += src[0];
                 src.shift();
+            }
+            if (src[0] == ")" && src.length == 1) {
+                roundbrak[1] = true;
+                src.shift();
+            }
+            else {
+                return { type: TokenType.Text, value: [line] };
             }
 
 

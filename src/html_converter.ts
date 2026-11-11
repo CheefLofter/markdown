@@ -30,6 +30,8 @@ export function convertToHTML(line: string): string {
             return `<br><br>`;
         case TokenType.Uoli:
             return `<ul><li>${token.value[0]}</li></ul>`;
+        case TokenType.Oli:
+            return `<ol start="${token.value[0]}"><li>${token.value[1]}</li></ol>`;
         case TokenType.Empty:
             return "";
         default:

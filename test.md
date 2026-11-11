@@ -13,13 +13,20 @@ random text
 
 ---
 
-![link to google](https://google.com)
-
+![link to google](https://google.com) 
 ___
+
+[link to google](https://google.com) 
 
 
 - uordered list element one
 - unoordered list element 2
 
+---
 
-img ./logo.png logo image
+1. nordered list
+2. another element 
+
+
+3) with braces
+4) hehe
