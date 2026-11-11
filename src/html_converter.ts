@@ -1,5 +1,5 @@
-import { tokenizer, TokenType } from "./tockenizer";
-import type { Token } from "./tockenizer";
+import { tokenizer, TokenType } from "./tokenizer";
+import type { Token } from "./tokenizer";
 
 export function convertToHTML(line: string): string {
 
