@@ -47,13 +47,28 @@ ___
 
 // links
 
-! <url> anythhing after this will be the dispaly text
+[alt text](link)
 
-// unordered list
+// images
+
+![alt](path)
+
+// lists
 
 - list data
 - more data
 
+1. odered list data
+2. another
+3) also supports braces
+
 // blankline
 
 emp 
+
+// inline fxx
+
+**text** => bold
+==text== => highlighted
+*text* => italic
+`text` => code
