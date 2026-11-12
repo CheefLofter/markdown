@@ -21,18 +21,8 @@ if (!filePath.endsWith(".md")) {
     process.exit(1);
 
 }
-
-
-
-const liner = new LineByLine(filePath);
-let line;
-
-Bun.write("build/output.html", "<!DOCTYPE html>\n<html>\n<head>\n<title>Converted Markdown</title>\n</head>\n<body>\n");
-
-while (line = liner.next()) {
-
-    await appendFile("build/output.html", convertToHTML(line.toString()));
-    await appendFile("build/output.html", "\n");
-
+if (Bun.argv[3] == "light" || Bun.argv[3] == "dark") {
+    await convertToHTML(filePath, Bun.argv[3]);
+} else {
+    await convertToHTML(filePath);
 }
-await appendFile("build/output.html", "\n</body>\n</html>");

@@ -2,7 +2,53 @@ import { tokenizer, TokenType } from "./tokenizer";
 import type { Token } from "./tokenizer";
 import { fxParser } from "./fx_parser";
 
-export function convertToHTML(line: string): string {
+import { appendFile } from 'node:fs/promises';
+import LineByLine from "n-readlines";
+
+
+export async function convertToHTML(filePath: string, css: "false" | "light" | "dark" = "false") {
+
+
+    const liner = new LineByLine(filePath);
+    let line;
+
+    Bun.write("build/output.html", "<!DOCTYPE html>\n<html>\n<head>\n<title>Converted Markdown</title>\n</head>\n<body>\n");
+
+
+
+
+    if (css == "light") {
+        const file = Bun.file(new URL("./static/style.css", import.meta.url));
+        const text = await file.text();
+        await appendFile("build/output.html", `<style>${text}</style>`);
+    }
+    if (css == "dark") {
+        const file = Bun.file(new URL("./static/style-dark.css", import.meta.url));
+        const text = await file.text();
+        await appendFile("build/output.html", `<style>${text}</style>`);
+    }
+
+
+
+
+
+    while (line = liner.next()) {
+
+        await appendFile("build/output.html", parser(line.toString()));
+        await appendFile("build/output.html", "\n");
+
+    }
+    await appendFile("build/output.html", "\n</body>\n</html>");
+}
+
+
+
+
+
+
+
+
+function parser(line: string): string {
 
     const token: Token = tokenizer(line);
 
