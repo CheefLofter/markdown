@@ -1,14 +1,13 @@
 
 
-let test = "start **bold** plain *italic* plain ==mark== plain `code` plain **bold text** plain *italic text* plain ==mark text== plain `code text` plain **bold** *italic* ==mark== `code` plain";
-
-export function fxTokenizer(text: string): string {
+export function fxParser(text: string): string {
 
     let src = text.trim().split("");
     let fHTML = "";
 
 
     src.unshift(" "); // add a space at the beginning to avoid index out of bounds error
+    src.push(" "); // add a space at the end to avoid index out of bounds error
     while (src.length > 0) {
 
 
@@ -32,7 +31,7 @@ export function fxTokenizer(text: string): string {
                 fHTML += `<b>${boldElement}</b>`;
             }
             else {
-                
+
                 fHTML += "**" + boldElement;
             }
         }
@@ -97,7 +96,7 @@ export function fxTokenizer(text: string): string {
                 fHTML += "==" + markElement;
             }
         }
-        
+
 
 
         else {
@@ -106,7 +105,3 @@ export function fxTokenizer(text: string): string {
     }
     return fHTML;
 }
-
-
-
-console.log(fxTokenizer(test));

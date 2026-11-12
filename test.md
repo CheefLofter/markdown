@@ -3,20 +3,20 @@
 ### heading3
 emp
 emp
-#### heading4
+#### heading4 `some code` some code 
 ##### heading5
 ###### heading6 six
 
 ***
 
-random text
+random text ==highilighted== 
 
 ---
 
-![link to google](https://google.com) 
+![link **to** google](https://google.com) 
 ___
 
-[link to google](https://google.com) 
+[link *to* google](https://google.com) 
 
 
 - uordered list element one
