@@ -22,6 +22,12 @@ To run:
 bun ./src/index.ts <markdown file > // has to have .md extention
 ```
 
+With css
+
+```
+bun ./src/index.ts <markdown file >  <css Style> // currently we have "light" and "dark"
+```
+
 # Reference
 
 ```
